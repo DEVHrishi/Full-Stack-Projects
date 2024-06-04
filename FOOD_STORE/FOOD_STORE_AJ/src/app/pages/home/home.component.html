@@ -1,0 +1,43 @@
+
+<app-search></app-search>
+<app-tags></app-tags>
+<app-not-found
+    [visible]="!foods || !foods.length"
+    resetLinkText="Reset Search"
+></app-not-found>
+
+<div class="flex flex-wrap items-center justify-center gap-5 my-5">
+    <div *ngFor="let food of foods">
+        <p-card [style]="{ width: '350px' }" (click)="foodDetails(food.id)">
+            <ng-template pTemplate="header">
+                <img alt="Card" src={{food.imageUrl}} />
+            </ng-template>
+
+            <ng-template pTemplate="content">
+                <div class="flex items-center justify-between">
+                    <span class="text-xl font-medium">{{food.name}}</span>
+                    <span *ngIf="food.favorite; else elseBlock"><i class="pi pi-heart-fill" style="color: red"></i></span>
+                    <ng-template #elseBlock><i class="pi pi-heart"></i></ng-template>
+                </div>
+                <p-rating [stars]="5" [(ngModel)]="food.stars" [readonly]="true" [cancel]="false"></p-rating>
+                <div class="flex justify-between items-center">
+                    <div class="flex justify-content-center gap-2">
+                        <span *ngFor="let tag of food.tags">
+                            <p-tag value={{tag}} [rounded]="true"></p-tag>
+                        </span>
+                    </div>
+                    
+                    <span><i class="pi pi-clock"></i> {{food.cookTime}}</span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <div class="font-bold">
+                    <i class="pi pi-dollar"></i> {{food.price.toFixed(2)}}
+                </div>
+            </ng-template>
+            
+        </p-card>
+    </div>
+    
+</div>

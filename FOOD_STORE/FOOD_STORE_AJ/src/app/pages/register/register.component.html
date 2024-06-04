@@ -1,0 +1,73 @@
+
+<div class="container mx-auto flex  items-center justify-center h-screen ">
+    <p-card [style]="{'padding': '5px', 'width': '400px'}">
+        <div class="text-center mb-5">
+            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" alt="Image" height="50"
+                class="mx-auto mb-3">
+            <div class="text-900 text-3xl font-medium mb-3">Welcome</div>
+            <div class="login">
+                Already a user? &nbsp;
+                <p-link routerLink="/login" [queryParams]="{returnUrl: returnUrl}" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
+                    Login Here
+                </p-link>
+            </div>
+
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="submit()">
+            <div class="mb-3">
+                <label for="name" class="block text-900 font-medium mb-2">Name</label>
+                <input id="name" type="text" placeholder="Name" pInputText class="w-full " formControlName="name">
+                <div *ngIf="fc.name.errors && isSubmitted">
+                    <small *ngIf="fc.name.errors.required">Should not be empty</small>
+                    <small *ngIf="fc.name.errors.minlength">Min len should be > 5 </small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+                <input id="email1" type="text" placeholder="Email address" pInputText class="w-full  "
+                    formControlName="email">
+                <div *ngIf="fc.email.errors && isSubmitted">
+                    <small *ngIf="fc.email.errors.required">Should not be empty</small>
+                    <small *ngIf="fc.email.errors.email">Email is not correct</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+                <input id="password1" type="password" placeholder="Password" pInputText class="w-full"
+                    formControlName="password">
+                <div *ngIf="fc.password.errors && isSubmitted">
+                    <small *ngIf="fc.password.errors.required">Should not be empty</small>
+                    <small *ngIf="fc.password.errors.minlength">Min len should be > 5 </small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password2" class="block text-900 font-medium mb-2">Confirm Password</label>
+                <input id="password2" type="password" placeholder="Confirm Password" pInputText class="w-full"
+                    formControlName="confirmPassword">
+                <div *ngIf="fc.confirmPassword.errors && isSubmitted">
+                    <small *ngIf="fc.confirmPassword.errors.required">Should not be empty</small>
+                    
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="block text-900 font-medium mb-2">Address</label>
+                <input id="address" type="text" placeholder="Address" pInputText class="w-full "
+                    formControlName="address">
+                <div *ngIf="fc.address.errors && isSubmitted">
+                    <small *ngIf="fc.address.errors.required">Should not be empty</small>
+                    <small *ngIf="fc.address.errors.minlength">Min len should be > 5</small>
+                </div>
+            </div>
+
+
+            <button pButton pRipple label="Register" icon="pi pi-user" type="submit" class="w-full"></button>
+        </form>
+    </p-card>
+
+
+</div>

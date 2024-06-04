@@ -1,0 +1,7 @@
+<div class="flex items-center justify-center m-5">
+    <span class="p-input-icon-right bg-slate-200 rounded-3xl">
+        <i class="pi pi-search " (click)="search(s.value)" ></i>
+        <input #s type="text" pInputText placeholder="Search Food" class="p-inputtext-lg p-3  bg-slate-200" (keyup.enter)="search(s.value)" />
+    </span>
+</div>
+

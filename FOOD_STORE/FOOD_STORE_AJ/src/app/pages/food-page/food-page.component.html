@@ -1,0 +1,49 @@
+<app-not-found
+    [visible]="!food.id"
+    notFoundMessage="Food not Found"
+    resetLinkText="Back To Homepage"
+></app-not-found>
+<div *ngIf="food.id" class="min-h-screen flex items-center justify-center">
+    <div class="w-1/2 flex  items-center justify-center gap-5 ">
+        <img [src]="food.imageUrl" alt="img" class="w-3/4 rounded-md ">
+        <div class="w-1/2">
+            <p-card [style]="{ width: '350px' }">
+
+                <ng-template pTemplate="content">
+                    <div class="flex items-center justify-between mb-3 ">
+                        <span class="text-3xl font-semibold">{{food.name}}</span>
+                        <span *ngIf="food.favorite; else elseBlock"><i class="pi pi-heart-fill"
+                                style="color: red"></i></span>
+                        <ng-template #elseBlock><i class="pi pi-heart"></i></ng-template>
+                    </div>
+                    <p-rating [stars]="5" [(ngModel)]="food.stars" [readonly]="true" [cancel]="false"></p-rating>
+                    <div class="flex justify-content-center gap-2 my-3">
+                        <span *ngFor="let org of food.origins">
+                            <p-tag value={{org}} [rounded]="true" [style]="{'background': '#ccc', 'color': 'black'}"></p-tag>
+                        </span>
+                    </div>
+
+                    <div class="flex justify-content-center gap-2 my-3">
+                        <span *ngFor="let tag of food.tags">
+                            <p-tag value={{tag}} [rounded]="true"></p-tag>
+                        </span>
+                    </div>
+
+                    <div class="my-3">Time to cook about <span class="font-medium">{{food.cookTime}}</span> minute</div>
+
+                    <div class="font-bold text-xl">
+                        Price: <i class="pi pi-dollar"></i> {{food.price.toFixed(2)}}
+                    </div>
+
+
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Add to Cart" class="w-full bg-red-500" (click)="addToCart()"></button>
+                </ng-template>
+
+            </p-card>
+        </div>
+    </div>
+    
+</div>

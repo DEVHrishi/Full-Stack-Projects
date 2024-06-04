@@ -1,0 +1,46 @@
+<div class="container mx-auto">
+    <app-not-found
+        [visible]="!cart || !cart.items.length"
+        notFoundMessage="Cart page is empty!"
+        resetLinkText="Go To Homepage"
+    ></app-not-found>
+    <div class="flex" *ngIf="cart && cart.items.length">
+        <div class="w-3/4 m-4">
+            <p-dataView #dv [value]="cart.items">
+                <ng-template pTemplate="listItem" let-cartItem>
+                        <div class="grid grid-cols-5 p-4 gap-2 border items-center text-center">
+                            <img [src]="cartItem.food.imageUrl" [alt]="cartItem.food.name" class="w-1/2 rounded-sm " />
+                            <div class="text-xl font-medium ">{{ cartItem.food.name }}</div>
+                            
+                            <p-dropdown  [options]="quantityOptions" optionValue="qty" [(ngModel)]="cartItem.selectedQuantity" (onChange)="changeQuantity(cartItem, cartItem.selectedQuantity)" placeholder="qty" optionLabel="qty" [style]="{'width': '5rem' }"></p-dropdown>
+                            
+                            <div class="text-xl font-medium ">${{ cartItem.food.price }}</div>
+
+                            <p-button label="remove" [style]="{'background': '#4244db', 'padding': '0.5rem', 'color': 'white'}"
+                                (click)="removeFromCart(cartItem)"></p-button>
+                            
+                        </div>
+                </ng-template>
+    
+            </p-dataView>
+        </div>
+    
+        <div class="w-1/4 m-4">
+            <p-card >
+                <ng-template pTemplate="content">
+                    <div class="text-center">
+                        <div>Count: <span class="font-medium">{{cart.totalCount}}</span></div>
+                        <div>Price: <span class="font-medium">${{cart.totalPrice}}</span></div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    
+                    <button pButton pRipple label="Proceed to Checkout" class="w-full bg-blue-500" routerLink="/checkout"></button>
+                    
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+
+    
+</div>

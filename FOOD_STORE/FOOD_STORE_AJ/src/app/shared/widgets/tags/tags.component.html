@@ -1,0 +1,11 @@
+<div *ngIf="tags" class="flex items-center justify-center gap-2">
+    <div *ngFor="let tag of tags">
+        <p-tag [style]="{ 'background': 'linear-gradient(90deg, rgba(213,212,223,1) 0%, rgba(249,247,223,1) 100%, rgba(0,212,255,1) 100%)', 'color': 'black', 'cursor': 'pointer'}" [rounded]="true" (click)="onClickTag(tag.name)">
+            <div class="flex items-center">
+                <span>{{tag.name}}</span>
+                <span>({{tag.count}})</span>
+            </div>
+        </p-tag>
+    </div>
+
+</div>

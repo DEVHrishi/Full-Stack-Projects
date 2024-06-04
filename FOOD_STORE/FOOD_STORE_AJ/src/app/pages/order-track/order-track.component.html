@@ -1,0 +1,52 @@
+<div class="container mx-auto">
+
+    <div class="flex gap-4">
+        <div class="w-1/2">
+            <h1>Order #{{order.id}}</h1>
+
+            <div><strong>Date : </strong> {{order.createdAt | date:'medium'}}</div>
+            <div><strong>Name : </strong> {{order.name}}</div>
+            <div><strong>Address : </strong> {{order.address}}</div>
+            <div><strong>Status : </strong> {{order.status}}</div>
+            <div *ngIf="order.paymentId">
+                <strong>Payment ID : </strong> {{order.paymentId}}
+            </div>
+
+
+            <p-dataView #dv [value]="order.items">
+                <ng-template pTemplate="header">
+                    <h3>Order Items</h3>
+                </ng-template>
+                <ng-template pTemplate="listItem" let-Item>
+                    <div class="grid grid-cols-5 p-2 gap-1 border items-center text-center">
+                        <img [src]="Item.food.imageUrl" [alt]="Item.food.name" class="w-1/2 rounded-sm " />
+
+                        <div class="text-xl font-medium ">{{ Item.food.name }}</div>
+
+                        <div class="text-xl font-medium ">${{ Item.food.price }}</div>
+
+                        <div class="text-xl font-medium ">{{ Item.quantity }}</div>
+
+                        <div class="text-xl font-medium ">${{ Item.price }}</div>
+
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="flex text-xl font-bold gap-12">
+                        <div>Total:</div>
+                        <div>${{order.totalPrice}}</div>
+                    </div>
+
+                </ng-template>
+
+            </p-dataView>
+        </div>
+
+        <div class="w-1/2">
+            <h3>Shipping Address</h3>
+            <app-map [order]="order" [readonly]="true"></app-map>
+        </div>
+    </div>
+
+
+</div>
